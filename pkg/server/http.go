@@ -30,12 +30,10 @@ func (s httpServer) Start(ctx context.Context) error {
 		Handler:     m,
 	}
 	go func() {
-		select {
-		case <-ctx.Done():
-			logger.Info("Stopping server")
-			if err := sv.Close(); err != nil {
-				logger.Error(err, "could not close server")
-			}
+		<-ctx.Done()
+		logger.Info("Stopping server")
+		if err := sv.Close(); err != nil {
+			logger.Error(err, "could not close server")
 		}
 	}()
 	logger.Info("Starting server", "addr", sv.Addr)
