@@ -23,6 +23,7 @@ func (s httpServer) Start(ctx context.Context) error {
 
 	m := http.NewServeMux()
 	m.Handle("/jobs/start", handlers.StartJob{K8sClient: s.k8sClient})
+	m.Handle("/jobs/status", handlers.GetJobStatus{K8sClient: s.k8sClient})
 
 	sv := http.Server{
 		BaseContext: func(listener net.Listener) context.Context { return ctx },

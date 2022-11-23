@@ -21,6 +21,10 @@ type StartJob struct {
 func (s StartJob) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
 	logger := ctrl.LoggerFrom(ctx)
+	if r.Method != "POST" {
+		http.Error(w, "method not allowed", http.StatusMethodNotAllowed)
+		return
+	}
 	if err := r.ParseForm(); err != nil {
 		http.Error(w, fmt.Sprintf("invalid request: %s", err), 400)
 		return
