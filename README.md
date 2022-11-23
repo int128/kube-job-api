@@ -1,2 +1,3 @@
-# kube-job-api
-API server to start Job on Kubernetes
+# kube-job-server
+
+This is an API server to start a Job on Kubernetes.
