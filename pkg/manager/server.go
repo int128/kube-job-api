@@ -1,4 +1,4 @@
-package server
+package manager
 
 import (
 	"context"
@@ -12,21 +12,20 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/client"
 )
 
-type Server struct {
+type jobServer struct {
 	K8sClient client.Client
 	Addr      string
 }
 
-func (s Server) Start(ctx context.Context) error {
-	logger := ctrl.LoggerFrom(ctx).WithName("http-server")
-	ctrl.LoggerInto(ctx, logger)
-
+func (s jobServer) Start(ctx context.Context) error {
 	m := http.NewServeMux()
 	m.Handle("/jobs/start", handlers.StartJob{K8sClient: s.K8sClient})
 	m.Handle("/jobs/status", handlers.GetJobStatus{K8sClient: s.K8sClient})
 
+	logger := ctrl.LoggerFrom(ctx).WithName("job-server")
+	ctrl.LoggerInto(ctx, logger)
 	sv := http.Server{
-		BaseContext: func(listener net.Listener) context.Context { return ctx },
+		BaseContext: func(net.Listener) context.Context { return ctx },
 		Addr:        s.Addr,
 		Handler:     m,
 	}
