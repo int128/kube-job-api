@@ -3,4 +3,10 @@ layout:
 - go.kubebuilder.io/v3
 projectName: kube-job-server
 repo: github.com/int128/kube-job-server
+resources:
+- controller: true
+  domain: int128.github.io
+  group: kubejobserver
+  kind: HTTPServer
+  version: v1
 version: "3"
