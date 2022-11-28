@@ -14,6 +14,9 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/client"
 )
 
+//+kubebuilder:rbac:groups=batch,resources=cronjobs,verbs=get;list;watch
+//+kubebuilder:rbac:groups=batch,resources=jobs,verbs=get;list;watch;create;update;patch;delete
+
 type StartJob struct {
 	K8sClient client.Client
 }
