@@ -4,6 +4,5 @@
     "github>int128/renovate-base",
     "github>int128/go-renovate-config",
     "github>int128/go-renovate-config:kubernetes",
-    "github>int128/go-renovate-config:kustomization-github-releases",
   ],
 }
