@@ -19,7 +19,7 @@ var _ = Describe("HTTP server controller", func() {
 			g.Expect(err).ShouldNot(HaveOccurred())
 			resp, err := http.DefaultClient.Do(req.WithContext(ctx))
 			g.Expect(err).ShouldNot(HaveOccurred())
-			g.Expect(resp.StatusCode).Should(Equal(404))
+			g.Expect(resp.StatusCode).Should(Equal(200))
 		}, timeout, interval).Should(Succeed())
 	})
 })

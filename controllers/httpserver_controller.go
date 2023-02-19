@@ -24,6 +24,7 @@ import (
 	"net/http"
 
 	"github.com/int128/kube-job-server/pkg/handlers"
+	"github.com/int128/kube-job-server/static"
 	"k8s.io/apimachinery/pkg/runtime"
 	ctrl "sigs.k8s.io/controller-runtime"
 	"sigs.k8s.io/controller-runtime/pkg/client"
@@ -39,8 +40,9 @@ type HTTPServerController struct {
 // Start starts the HTTPServer
 func (r *HTTPServerController) Start(ctx context.Context) error {
 	m := http.NewServeMux()
-	m.Handle("/jobs/start", handlers.StartJob{K8sClient: r.Client})
-	m.Handle("/jobs/status", handlers.GetJobStatus{K8sClient: r.Client})
+	m.Handle("/api/jobs/start", handlers.StartJob{K8sClient: r.Client})
+	m.Handle("/api/jobs/status", handlers.GetJobStatus{K8sClient: r.Client})
+	m.Handle("/", http.FileServer(http.FS(static.FS())))
 
 	logger := ctrl.LoggerFrom(ctx).WithName("job-server")
 	ctrl.LoggerInto(ctx, logger)
