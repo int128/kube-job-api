@@ -5,8 +5,7 @@ on:
     paths:
       - .github/workflows/go.yaml
       - go.*
-      - main.go
-      - pkg/**.go
+      - '**/*.go'
       - Makefile
   push:
     branches:
@@ -14,8 +13,7 @@ on:
     paths:
       - .github/workflows/go.yaml
       - go.*
-      - main.go
-      - pkg/**.go
+      - '**/*.go'
       - Makefile
 
 jobs:
