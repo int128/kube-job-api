@@ -3,7 +3,7 @@ module github.com/int128/kube-job-server
 go 1.19
 
 require (
-	github.com/onsi/ginkgo/v2 v2.12.1
+	github.com/onsi/ginkgo/v2 v2.13.0
 	github.com/onsi/gomega v1.28.0
 	k8s.io/api v0.28.2
 	k8s.io/apimachinery v0.28.2
